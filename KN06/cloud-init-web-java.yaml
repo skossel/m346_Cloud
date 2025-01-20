@@ -32,7 +32,6 @@ write_files:
       [Install] 
       WantedBy=multi-user.target
     path: /etc/systemd/system/shop-app.service
-
 # erstellt eine nginx Konfiguration
   - content: |
       server {
@@ -63,6 +62,7 @@ runcmd:
   # install App
   - sudo mkdir /var/www
   - sudo mkdir /var/www/app
+  # ersetzt die Platzhalter
   - sudo sed -i 's/<clusterUrl>/cluster0.tce1q.mongodb.net/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo sed -i 's/<username>/sandro/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo sed -i 's/<password>/sandro/g' /home/ubuntu/m346scripts/KN06/java/production.properties
