@@ -7,6 +7,7 @@ users:
     shell: /bin/bash
     ssh_authorized_keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0WGP1EZykEtv5YGC9nMiPFW3U3DmZNzKFO5nEu6uozEHh4jLZzPNHSrfFTuQ2GnRDSt+XbOtTLdcj26+iPNiFoFha42aCIzYjt6V8Z+SQ9pzF4jPPzxwXfDdkEWylgoNnZ+4MG1lNFqa8aO7F62tX0Yj5khjC0Bs7Mb2cHLx1XZaxJV6qSaulDuBbLYe8QUZXkMc7wmob3PM0kflfolR3LE7LResIHWa4j4FL6r5cQmFlDU2BDPpKMFMGUfRSFiUtaWBNXFOWHQBC2+uKmuMPYP4vJC9sBgqMvPN/X2KyemqdMvdKXnCfrzadHuSSJYEzD64Cve5Zl9yVvY4AqyBD aws-key
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/V1D3vRaUTTMWmO7nQOOVTTxwiyXioeKHlInt+vAl21sCw55x/l1o+trABID4Sy6KfgMEyp3ZJXhAbrtLbt3EqaiyMleajdJlTT2MUnIXUe1z4Ju6JXy2/XNdK1KqgScCXg4d5iw3SwknxI4+JrjffCYuyFz3QtMcU2sozc0QDSWs2xlF19yqc1q4oCVuEiHVqZWypq42CKmDL1C2qY+1bwBeVl9ERS0ShMK/41ABU536Lng8mN+YR9Qd4fjjHfJ55WpN/deoHqHMdgs8P6VGHUqjkAya5pMl9cmiLYgmvNLft3d6Wj0UPkLHBa+QGvofdi5SZUr3l48RLxTsrXXl aws-key
 ssh_pwauth: true
 disable_root: false  
 package_update: true 
@@ -53,13 +54,13 @@ runcmd:
   - sudo apt-get update
   - sudo apt-get install -y mongodb-mongosh
   # import mongodb collections
-  - mongosh "mongodb+srv://[[Mongodb-Cluster-URL]]/" --u [[Mongodb-username]] -p [[Mongodb-password]] < /home/ubuntu/m346scripts/KN06/shop-database-mongodb.txt
+  - mongosh "mongodb+srv://cluster0.tce1q.mongodb.net" --u sandro -p sandro < /home/ubuntu/m346scripts/KN06/shop-database-mongodb.txt
   # install App
   - sudo mkdir /var/www
   - sudo mkdir /var/www/app
-  - sudo sed -i 's/<clusterUrl>/[[Mongodb-Cluster-URL]]/g' /home/ubuntu/m346scripts/KN06/java/production.properties
-  - sudo sed -i 's/<username>/[[Mongodb-username]]/g' /home/ubuntu/m346scripts/KN06/java/production.properties
-  - sudo sed -i 's/<password>/[[Mongodb-password]]/g' /home/ubuntu/m346scripts/KN06/java/production.properties
+  - sudo sed -i 's/<clusterUrl>/cluster0.tce1q.mongodb.net/g' /home/ubuntu/m346scripts/KN06/java/production.properties
+  - sudo sed -i 's/<username>/sandro/g' /home/ubuntu/m346scripts/KN06/java/production.properties
+  - sudo sed -i 's/<password>/sandro/g' /home/ubuntu/m346scripts/KN06/java/production.properties
   - sudo cp -r /home/ubuntu/m346scripts/KN06/java/* /var/www/app/
   - sudo systemctl enable shop-app.service
   - sudo systemctl start shop-app.service
