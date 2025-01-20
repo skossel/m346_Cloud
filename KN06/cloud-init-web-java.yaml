@@ -16,6 +16,8 @@ packages:
   - wget
   - nginx
   - openjdk-17-jre-headless
+
+# erstellt einen service aus der Java-App
 write_files:
   - content: |
       [Unit]
@@ -30,6 +32,8 @@ write_files:
       [Install] 
       WantedBy=multi-user.target
     path: /etc/systemd/system/shop-app.service
+
+# erstellt eine nginx Konfiguration
   - content: |
       server {
         listen        80;
@@ -54,6 +58,7 @@ runcmd:
   - sudo apt-get update
   - sudo apt-get install -y mongodb-mongosh
   # import mongodb collections
+  - # Datenbank neu befüllen
   - mongosh "mongodb+srv://cluster0.tce1q.mongodb.net" --u sandro -p sandro < /home/ubuntu/m346scripts/KN06/shop-database-mongodb.txt
   # install App
   - sudo mkdir /var/www
